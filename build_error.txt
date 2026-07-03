@@ -1,0 +1,229 @@
+﻿Running Gradle task 'assembleRelease'...                        
+flutter : e: file:///C:/Users/hp/Documents/apps/simuni_app/andro
+id/app/build.gradle.kts:17:23: Unexpected tokens (use ';' to 
+separate expressions on the same line)
+At line:1 char:1
++ flutter build apk 2>&1 | Out-File -FilePath build_error.txt 
+-Encoding ...
++ ~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (e: file:///C:/U... 
+    the same line):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:21:39: Expecting an element
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:21:50: Expecting an expression
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:22:39: Expecting an element
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:33:1: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:35:1: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:35:8: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:36:5: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:36:21: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:37:9: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:37:19: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:37:21: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:37:24: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:37:25: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:37:34: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:37:35: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:37:41: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:37:42: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:37:48: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:37:49: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:37:52: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:37:53: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:37:62: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:37:63: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:38:5: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:39:1: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:41:1: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:41:9: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:42:5: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:42:12: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:42:14: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:42:15: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:42:20: Unexpected symbol
+e: file:///C:/Users/hp/Documents/apps/simuni_app/android/app/bui
+ld.gradle.kts:43:1: Unexpected symbol
+
+FAILURE: Build failed with an exception.
+
+* Where:
+Build file 'C:\Users\hp\Documents\apps\simuni_app\android\app\bu
+ild.gradle.kts' line: 17
+
+* What went wrong:
+Script compilation errors:
+
+  Line 17:         applicationId "com.example.simuni"
+                                 ^ Unexpected tokens (use ';' 
+to separate expressions on the same line)
+
+  Line 21:         versionCode flutterVersionCode.toInteger()
+                                                 ^ Expecting an 
+element
+
+  Line 21:         versionCode flutterVersionCode.toInteger()
+                                                            ^ 
+Expecting an expression
+
+  Line 22:         versionName flutterVersionName
+                                                 ^ Expecting an 
+element
+
+  Line 33: }
+           ^ Unexpected symbol
+
+  Line 35: kotlin {
+           ^ Unexpected symbol
+
+  Line 35: kotlin {
+                  ^ Unexpected symbol
+
+  Line 36:     compilerOptions {
+               ^ Unexpected symbol
+
+  Line 36:     compilerOptions {
+                               ^ Unexpected symbol
+
+  Line 37:         jvmTarget = 
+org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+                   ^ Unexpected symbol
+
+  Line 37:         jvmTarget = 
+org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+                             ^ Unexpected symbol
+
+  Line 37:         jvmTarget = 
+org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+                               ^ Unexpected symbol
+
+  Line 37:         jvmTarget = 
+org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+                                  ^ Unexpected symbol
+
+  Line 37:         jvmTarget = 
+org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+                                   ^ Unexpected symbol
+
+  Line 37:         jvmTarget = 
+org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+                                            ^ Unexpected symbol
+
+  Line 37:         jvmTarget = 
+org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+                                             ^ Unexpected symbol
+
+  Line 37:         jvmTarget = 
+org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+                                                   ^ Unexpected 
+symbol
+
+  Line 37:         jvmTarget = 
+org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+                                                    ^ 
+Unexpected symbol
+
+  Line 37:         jvmTarget = 
+org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+                                                          ^ 
+Unexpected symbol
+
+  Line 37:         jvmTarget = 
+org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+                                                           ^ 
+Unexpected symbol
+
+  Line 37:         jvmTarget = 
+org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+                                                              ^ 
+Unexpected symbol
+
+  Line 37:         jvmTarget = 
+org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+                                                               
+^ Unexpected symbol
+
+  Line 37:         jvmTarget = 
+org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+                                                                
+        ^ Unexpected symbol
+
+  Line 37:         jvmTarget = 
+org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+                                                                
+         ^ Unexpected symbol
+
+  Line 38:     }
+               ^ Unexpected symbol
+
+  Line 39: }
+           ^ Unexpected symbol
+
+  Line 41: flutter {
+           ^ Unexpected symbol
+
+  Line 41: flutter {
+                   ^ Unexpected symbol
+
+  Line 42:     source = "../.."
+               ^ Unexpected symbol
+
+Running Gradle task 'assembleRelease'...                            3.2s
+  Line 42:     source = "../.."
+                      ^ Unexpected symbol
+
+  Line 42:     source = "../.."
+                        ^ Unexpected symbol
+
+  Line 42:     source = "../.."
+                         ^ Unexpected symbol
+
+  Line 42:     source = "../.."
+                              ^ Unexpected symbol
+
+  Line 43: }
+           ^ Unexpected symbol
+
+34 errors
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to generate a Build Scan (Powered by 
+Develocity).
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 2s
+Gradle task assembleRelease failed with exit code 1
