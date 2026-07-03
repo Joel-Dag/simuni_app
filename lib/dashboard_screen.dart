@@ -66,13 +66,27 @@ class _DashboardScreenState extends State<DashboardScreen> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF0F0F12),
         elevation: 0,
-        title: Text("ስሙኒ // $_accountNickname", style: const TextStyle(fontSize: 16, color: Colors.blueAccent, fontWeight: FontWeight.bold)),
+        title: Text(
+          "ስሙኒ // $_accountNickname",
+          style: const TextStyle(
+            fontSize: 16,
+            color: Colors.blueAccent,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         actions: [
           IconButton(
             onPressed: _triggerManualDeltaSync,
-            icon: _isSyncing 
-              ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.blueAccent))
-              : const Icon(Icons.refresh, color: Colors.white),
+            icon: _isSyncing
+                ? const SizedBox(
+                    width: 18,
+                    height: 18,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: Colors.blueAccent,
+                    ),
+                  )
+                : const Icon(Icons.refresh, color: Colors.white),
           ),
         ],
       ),
@@ -104,16 +118,40 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(_accountMask, style: TextStyle(color: Colors.grey[500], fontSize: 13, fontFamily: 'monospace')),
-                        const Icon(Icons.sensors, color: Colors.greenAccent, size: 16),
+                        Text(
+                          _accountMask,
+                          style: TextStyle(
+                            color: Colors.grey[500],
+                            fontSize: 13,
+                            fontFamily: 'monospace',
+                          ),
+                        ),
+                        const Icon(
+                          Icons.sensors,
+                          color: Colors.greenAccent,
+                          size: 16,
+                        ),
                       ],
                     ),
                     const SizedBox(height: 12),
-                    const Text("ACTIVE AGGREGATED LEDGER BALANCE", style: TextStyle(color: Colors.blueAccent, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 1.2)),
+                    const Text(
+                      "ACTIVE AGGREGATED LEDGER BALANCE",
+                      style: TextStyle(
+                        color: Colors.blueAccent,
+                        fontSize: 11,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1.2,
+                      ),
+                    ),
                     const SizedBox(height: 6),
                     Text(
-                      "${_realBalance.toStringAsFixed(2)} ETB", 
-                      style: const TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold, letterSpacing: -0.5)
+                      "${_realBalance.toStringAsFixed(2)} ETB",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: -0.5,
+                      ),
                     ),
                   ],
                 ),
@@ -122,22 +160,41 @@ class _DashboardScreenState extends State<DashboardScreen> {
               Row(
                 children: [
                   Expanded(
-                    child: _buildTelemetryNode("SAFE-TO-SPEND / DAY", "${_safeToSpend.toStringAsFixed(2)} ETB", Icons.shield_outlined),
+                    child: _buildTelemetryNode(
+                      "SAFE-TO-SPEND / DAY",
+                      "${_safeToSpend.toStringAsFixed(2)} ETB",
+                      Icons.shield_outlined,
+                    ),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
-                    child: _buildTelemetryNode("60D VELOCITY", "${_monthlyVelocity.toStringAsFixed(2)} ETB", Icons.bolt),
+                    child: _buildTelemetryNode(
+                      "60D VELOCITY",
+                      "${_monthlyVelocity.toStringAsFixed(2)} ETB",
+                      Icons.bolt,
+                    ),
                   ),
                 ],
               ),
               const SizedBox(height: 32),
-              const Text("PARSED LEDGER TIMELINE", style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 1)),
+              const Text(
+                "PARSED LEDGER TIMELINE",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1,
+                ),
+              ),
               const SizedBox(height: 16),
               if (_historyList.isEmpty)
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 40.0),
-                    child: Text("No incoming account records tracked yet.", style: TextStyle(color: Colors.grey[600], fontSize: 13)),
+                    child: Text(
+                      "No incoming account records tracked yet.",
+                      style: TextStyle(color: Colors.grey[600], fontSize: 13),
+                    ),
                   ),
                 )
               else
@@ -145,11 +202,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: _historyList.length,
-                    separatorBuilder: (context, index) => const SizedBox(height: 10),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 10),
                   itemBuilder: (context, index) {
                     final tx = _historyList[index];
                     return Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 14,
+                      ),
                       decoration: BoxDecoration(
                         color: const Color(0xFF16161F),
                         borderRadius: BorderRadius.circular(12),
@@ -162,18 +223,46 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(tx.depositorName, style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis),
+                                Text(
+                                  tx.depositorName,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                                 const SizedBox(height: 4),
-                                Text(tx.referenceNumber, style: TextStyle(color: Colors.grey[600], fontSize: 11, fontFamily: 'monospace')),
+                                Text(
+                                  tx.referenceNumber,
+                                  style: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontSize: 11,
+                                    fontFamily: 'monospace',
+                                  ),
+                                ),
                               ],
                             ),
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Text("+${tx.amount.toStringAsFixed(2)} ETB", style: const TextStyle(color: Colors.greenAccent, fontSize: 14, fontWeight: FontWeight.bold)),
+                              Text(
+                                "+${tx.amount.toStringAsFixed(2)} ETB",
+                                style: const TextStyle(
+                                  color: Colors.greenAccent,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                               const SizedBox(height: 4),
-                              Text("${tx.transactionDate.day}/${tx.transactionDate.month}", style: TextStyle(color: Colors.grey[600], fontSize: 11)),
+                              Text(
+                                "${tx.transactionDate.day}/${tx.transactionDate.month}",
+                                style: TextStyle(
+                                  color: Colors.grey[600],
+                                  fontSize: 11,
+                                ),
+                              ),
                             ],
                           ),
                         ],
@@ -201,9 +290,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
         children: [
           Icon(icon, color: Colors.blueAccent, size: 18),
           const SizedBox(height: 12),
-          Text(title, style: TextStyle(color: Colors.grey[500], fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
+          Text(
+            title,
+            style: TextStyle(
+              color: Colors.grey[500],
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 0.5,
+            ),
+          ),
           const SizedBox(height: 4),
-          Text(val, style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis),
+          Text(
+            val,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
+            overflow: TextOverflow.ellipsis,
+          ),
         ],
       ),
     );
