@@ -1,67 +1,50 @@
 // lib/sms_sync_service.dart
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter_sms_inbox/flutter_sms_inbox.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'database_helper.dart';
-import 'gemini_parser_service.dart';
 import 'transaction_model.dart';
+import 'gemini_parser_service.dart';
 
 class SmsSyncService {
   final SmsQuery _query = SmsQuery();
-  final GeminiParserService _aiParser = GeminiParserService();
-  final DatabaseHelper _dbHelper = DatabaseHelper.instance;
+  final DatabaseHelper _dbHelper = DatabaseHelper();
+  final GeminiParserService _parser = GeminiParserService();
 
-  /// Scans the physical device inbox, isolates new financial texts since 
-  /// the last entry date, and automatically streams them through Gemini.
-  Future<void> syncMissedTransactions() async {
-    try {
-      // 1. Fetch current transaction history to determine our checkpoint time
-      final existingTransactions = await _dbHelper.getAllTransactions();
-      
-      DateTime lastSyncPoint = DateTime.now().subtract(const Duration(days: 30));
-      
-      if (existingTransactions.isNotEmpty) {
-        // Set sync point to the time of our most recent transaction
-        lastSyncPoint = existingTransactions.first.transactionDate;
-      }
+  Future<void> syncSmsInbox({DateTime? since, Function(double)? onProgress}) async {
+    var permission = await Permission.sms.status;
+    if (!permission.isGranted) {
+      permission = await Permission.sms.request();
+      if (!permission.isGranted) return;
+    }
 
-      // 2. Query the device SMS inbox provider
-      final List<SmsMessage> rawMessages = await _query.querySms(
-        kinds: [SmsQueryKind.inbox],
-      );
+    final DateTime thresholdDate = since ?? DateTime.now().subtract(const Duration(days: 3));
+    
+    List<SmsMessage> messages = await _query.querySms(
+      kinds: [SmsQueryKind.inbox],
+      address: '8011',
+    );
 
-      debugPrint("ስሙኒ Sync: Total texts scanned in inbox: ${rawMessages.length}");
+    List<SmsMessage> filteredMessages = messages.where((msg) {
+      if (msg.date == null) return false;
+      return msg.date!.isAfter(thresholdDate);
+    }).toList();
 
-      // 3. Filter down to targeted financial notifications arriving after our last record
-      final targetSenders = {'CBE', 'CBEBIRR', '8890', 'E-BIRR'};
-      final missedMessages = rawMessages.where((sms) {
-        final sender = sms.address?.toUpperCase() ?? '';
-        final date = sms.date ?? DateTime.now();
-        
-        return targetSenders.contains(sender) && date.isAfter(lastSyncPoint);
-      }).toList();
+    if (filteredMessages.isEmpty) {
+      if (onProgress != null) onProgress(1.0);
+      return;
+    }
 
-      debugPrint("ስሙኒ Sync: Found ${missedMessages.length} un-synced bank texts.");
-
-      // 4. Loop over missed messages and parse sequentially using Gemini
-      int successfulParses = 0;
-      for (var sms in missedMessages.reversed) {
-        if (sms.body == null) continue;
-
-        final TransactionModel? parsedResult = await _aiParser.parseTransactionSms(
-          sms.body!,
-          sms.date ?? DateTime.now(),
-        );
-
-        if (parsedResult != null) {
-          await _dbHelper.insertTransaction(parsedResult);
-          successfulParses++;
+    for (int i = 0; i < filteredMessages.length; i++) {
+      final msg = filteredMessages[i];
+      if (msg.body != null) {
+        TransactionModel? parsedTx = await _parser.parseSmsBody(msg.body!, msg.date ?? DateTime.now());
+        if (parsedTx != null) {
+          await _dbHelper.insertTransaction(parsedTx);
         }
       }
-
-      debugPrint("ስሙኒ Sync Core: Completed. Successfully added $successfulParses new transaction rows.");
-    } catch (e) {
-      debugPrint("ስሙኒ Sync Core Exception occurred: $e");
+      if (onProgress != null) {
+        onProgress((i + 1) / filteredMessages.length);
+      }
     }
   }
 }

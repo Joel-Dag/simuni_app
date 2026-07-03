@@ -28,48 +28,33 @@ class _ApiKeyScreenState extends State<ApiKeyScreen> {
       setState(() => _statusMessage = "Target configuration fields are mandatory.");
       return;
     }
-    if (account.length < 13) {
-      setState(() => _statusMessage = "Please enter a valid CBE 13-digit account number.");
-      return;
-    }
 
     setState(() {
       _isAuthenticating = true;
-      _statusMessage = "Connecting securely to Google Vertex Core...";
+      _statusMessage = "Connecting securely via Google Gateway...";
     });
 
-    // Simulate secure Google Auth Gateway handoff
     await Future.delayed(const Duration(seconds: 2));
 
     setState(() {
-      _statusMessage = "Analyzing historic financial runway (Past 2 Months)...";
+      _statusMessage = "Syncing historical logs (Past 2 Months)...";
     });
 
-    // Instantiate dynamic 2-month back-scan initialization layer
     final smsService = SmsSyncService();
-    
-    // Save configuration profiles first so parser filters correctly
-    await _storageService.saveApiKey("VERTEX_ROUTED_KEY_INTEGRATION");
+    await _storageService.saveApiKey("VERTEX_ROUTED_FREE_TIER");
     await _storageService.saveAccountProfile(fullAccount: account, nickname: nickname);
 
     try {
-      // Look back exactly 60 days to seed the user's baseline financial habits
-      final dynamicDateTimeThreshold = DateTime.now().subtract(const Duration(days: 60));
-      
+      final sixtyDaysAgo = DateTime.now().subtract(const Duration(days: 60));
       await smsService.syncSmsInbox(
-        since: dynamicDateTimeThreshold,
-        onProgress: (progress) {
-          setState(() {
-            _scanProgress = progress;
-          });
-        },
+        since: sixtyDaysAgo,
+        onProgress: (progress) => setState(() => _scanProgress = progress),
       );
-
       widget.onSetupComplete();
     } catch (e) {
       setState(() {
         _isAuthenticating = false;
-        _statusMessage = "Initialization Error: Core sync interrupted.";
+        _statusMessage = "Sync interrupted. Please try again.";
       });
     }
   }
@@ -86,7 +71,6 @@ class _ApiKeyScreenState extends State<ApiKeyScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Minimalist Obsidian Title Badge
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
@@ -99,16 +83,12 @@ class _ApiKeyScreenState extends State<ApiKeyScreen> {
                 const SizedBox(height: 24),
                 const Text("ስሙኒ", style: TextStyle(color: Colors.white, fontSize: 36, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 8),
-                Text(
-                  "On-device zero-knowledge financial ledger. All operations run locally.", 
-                  style: TextStyle(color: Colors.grey[400], fontSize: 14, height: 1.4)
-                ),
+                Text("On-device financial analysis gateway.", style: TextStyle(color: Colors.grey[400], fontSize: 14)),
                 const SizedBox(height: 32),
                 _buildInputField(controller: _accountController, label: "Target CBE Account Number", hint: "1000659904923"),
                 const SizedBox(height: 16),
                 _buildInputField(controller: _nicknameController, label: "Account Tracking Label / Nickname", hint: "Primary Wallet"),
                 const SizedBox(height: 32),
-                
                 if (_isAuthenticating) ...[
                   LinearProgressIndicator(value: _scanProgress, backgroundColor: const Color(0xFF16161F), color: Colors.blueAccent),
                   const SizedBox(height: 12),
@@ -145,7 +125,6 @@ class _ApiKeyScreenState extends State<ApiKeyScreen> {
     return TextField(
       controller: controller,
       style: const TextStyle(color: Colors.white),
-      keyboardType: TextInputType.number,
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: TextStyle(color: Colors.grey[600], fontSize: 14),

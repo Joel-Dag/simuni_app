@@ -1,43 +1,36 @@
 // lib/transaction_model.dart
-
 class TransactionModel {
+  final int? id;
   final String referenceNumber;
-  final String depositorName;
   final double amount;
+  final String depositorName;
   final DateTime transactionDate;
-  final String rawSmsBody;
-  final bool isMatchedToDebt;
 
   TransactionModel({
+    this.id,
     required this.referenceNumber,
-    required this.depositorName,
     required this.amount,
+    required this.depositorName,
     required this.transactionDate,
-    required this.rawSmsBody,
-    this.isMatchedToDebt = false,
   });
 
-  // Convert a Database row back into a usable Dart object
-  factory TransactionModel.fromMap(Map<String, dynamic> map) {
-    return TransactionModel(
-      referenceNumber: map['reference_number'] as String,
-      depositorName: map['depositor_name'] as String,
-      amount: (map['amount'] as num).toDouble(),
-      transactionDate: DateTime.parse(map['transaction_date'] as String),
-      rawSmsBody: map['raw_sms_body'] as String,
-      isMatchedToDebt: map['is_matched_to_debt'] == 1,
-    );
-  }
-
-  // Convert an object state into a structured Map for SQL execution
   Map<String, dynamic> toMap() {
     return {
-      'reference_number': referenceNumber,
-      'depositor_name': depositorName,
+      'id': id,
+      'referenceNumber': referenceNumber,
       'amount': amount,
-      'transaction_date': transactionDate.toIso8601String(),
-      'raw_sms_body': rawSmsBody,
-      'is_matched_to_debt': isMatchedToDebt ? 1 : 0,
+      'depositorName': depositorName,
+      'transactionDate': transactionDate.toIso8601String(),
     };
+  }
+
+  factory TransactionModel.fromMap(Map<String, dynamic> map) {
+    return TransactionModel(
+      id: map['id'],
+      referenceNumber: map['referenceNumber'],
+      amount: map['amount'],
+      depositorName: map['depositorName'],
+      transactionDate: DateTime.parse(map['transactionDate']),
+    );
   }
 }
