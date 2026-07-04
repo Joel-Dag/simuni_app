@@ -54,6 +54,9 @@ class GeminiParserService {
       return TransactionModel(
         referenceNumber: referenceKey,
         amount: parsedAmount,
+        rawSender: extractedSender,
+        accountLabel: extractedAccount,
+        typeLabel: isDeposit ? "RECEIVED" : "DEBITED",
         depositorName: activityLabel,
         transactionDate: smsDate,
       );
