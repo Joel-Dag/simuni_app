@@ -11,6 +11,7 @@ class AppState extends ChangeNotifier {
       rawSender: "CBE",
       accountLabel: "1000****3866",
       typeLabel: "RECEIVED",
+      depositorName: "Incoming Transfer (1000****3866)",
       transactionDate: DateTime.now().subtract(const Duration(hours: 2)),
     ),
     TransactionModel(
@@ -19,6 +20,7 @@ class AppState extends ChangeNotifier {
       rawSender: "Telebirr",
       accountLabel: "0944****21",
       typeLabel: "DEBITED",
+      depositorName: "Outgoing Payment (0944****21)",
       transactionDate: DateTime.now().subtract(const Duration(days: 1)),
     ),
   ];
