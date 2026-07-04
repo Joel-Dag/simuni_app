@@ -6,6 +6,8 @@ import 'database_helper.dart';
 import 'transaction_model.dart';
 import 'sms_history_service.dart';
 
+
+
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
 
@@ -17,7 +19,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
   final _storage = SecureStorageService();
   final _analytics = AnalyticsEngine();
   final _dbHelper = DatabaseHelper();
-  final _smsSync = SmsHistoryService();
 
   String _accountMask = "Loading...";
   String _accountNickname = "Account";
@@ -53,7 +54,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
     if (_isSyncing) return;
     setState(() => _isSyncing = true);
 
-    await _smsSync.syncSmsInbox();
+    final smsService = SmsHistoryService();
+    await smsService.syncSmsInbox();
     await _loadDeviceStateData();
 
     setState(() => _isSyncing = false);

@@ -54,6 +54,7 @@ class GeminiParserService {
       return TransactionModel(
         referenceNumber: referenceKey,
         amount: parsedAmount,
+        resultingBalance: 0.0,
         rawSender: "CBE",
         accountLabel: extractedAccount,
         typeLabel: isDeposit ? "RECEIVED" : "DEBITED",

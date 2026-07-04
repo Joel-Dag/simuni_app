@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'secure_storage_service.dart';
 import 'sms_history_service.dart';
 
+
 class ApiKeyScreen extends StatefulWidget {
   final VoidCallback onSetupComplete;
   const ApiKeyScreen({super.key, required this.onSetupComplete});
@@ -46,9 +47,7 @@ class _ApiKeyScreenState extends State<ApiKeyScreen> {
 
     try {
       final sixtyDaysAgo = DateTime.now().subtract(const Duration(days: 60));
-      await smsService.syncSmsInbox(
-        since: sixtyDaysAgo,
-      );
+      await smsService.syncSmsInbox(since: sixtyDaysAgo);
       widget.onSetupComplete();
     } catch (e) {
       setState(() {

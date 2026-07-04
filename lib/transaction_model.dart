@@ -1,49 +1,54 @@
-// lib/transaction_model.dart
+// lib/transaction_model.dart or lib/models/transaction_model.dart
 class TransactionModel {
   final String referenceNumber;
   final double amount;
-  final String rawSender;      // e.g., "CBE" or "Telebirr"
-  final String accountLabel;   // e.g., "1000****3866"
-  final String typeLabel;      // e.g., "RECEIVED", "DEBITED"
-  final String depositorName;  // e.g., "Incoming Transfer" or "Outgoing Payment"
+  final double resultingBalance; 
+  final String rawSender;        
+  final String accountLabel;
+  final String typeLabel;        
   final DateTime transactionDate;
+  final String depositorName; // Added back to satisfy dashboard and Gemini parser
 
   TransactionModel({
     required this.referenceNumber,
     required this.amount,
+    required this.resultingBalance,
     required this.rawSender,
     required this.accountLabel,
     required this.typeLabel,
-    required this.depositorName,
     required this.transactionDate,
+    required this.depositorName,
   });
 
-  // Helper method to quickly determine cashflow direction
-  bool get isIncome => amount > 0;
+  bool get isIncome => typeLabel == "RECEIVED";
 
-  // Convert to Map for database storage
+  /// FIX: Added to satisfy database serialization in database_helper.dart
   Map<String, dynamic> toMap() {
     return {
       'referenceNumber': referenceNumber,
       'amount': amount,
+      'resultingBalance': resultingBalance,
       'rawSender': rawSender,
       'accountLabel': accountLabel,
       'typeLabel': typeLabel,
-      'depositorName': depositorName,
       'transactionDate': transactionDate.toIso8601String(),
+      'depositorName': depositorName,
     };
   }
 
-  // Create from Map (database retrieval)
+  /// FIX: Added to satisfy database reconstruction in database_helper.dart
   factory TransactionModel.fromMap(Map<String, dynamic> map) {
     return TransactionModel(
-      referenceNumber: map['referenceNumber'] as String,
-      amount: (map['amount'] as num).toDouble(),
-      rawSender: map['rawSender'] as String,
-      accountLabel: map['accountLabel'] as String,
-      typeLabel: map['typeLabel'] as String,
-      depositorName: map['depositorName'] as String,
-      transactionDate: DateTime.parse(map['transactionDate'] as String),
+      referenceNumber: map['referenceNumber'] ?? '',
+      amount: (map['amount'] as num?)?.toDouble() ?? 0.0,
+      resultingBalance: (map['resultingBalance'] as num?)?.toDouble() ?? 0.0,
+      rawSender: map['rawSender'] ?? '',
+      accountLabel: map['accountLabel'] ?? '',
+      typeLabel: map['typeLabel'] ?? '',
+      transactionDate: map['transactionDate'] != null 
+          ? DateTime.parse(map['transactionDate']) 
+          : DateTime.now(),
+      depositorName: map['depositorName'] ?? '',
     );
   }
 }
