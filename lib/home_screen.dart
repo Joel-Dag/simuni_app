@@ -5,7 +5,7 @@ import 'app_state.dart';
 class HomeScreen extends StatefulWidget {
   final AppState appState; // Pass state down cleanly from main wrapper matrix
 
-  const HomeScreen({Key? key, required this.appState}) : super(key: key);
+  const HomeScreen({super.key, required this.appState});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -269,12 +269,12 @@ class _HomeScreenState extends State<HomeScreen> {
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [const Color(0xFFF7C948).withOpacity(0.07), const Color(0xFF182233)],
+          colors: [const Color(0xFFF7C948).withValues(alpha: 0.07), const Color(0xFF182233)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFFF7C948).withOpacity(0.25), width: 1.0),
+        border: Border.all(color: const Color(0xFFF7C948).withValues(alpha: 0.25), width: 1.0),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

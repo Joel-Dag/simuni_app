@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 class TransactionsScreen extends StatefulWidget {
-  const TransactionsScreen({Key? key}) : super(key: key);
+  const TransactionsScreen({super.key});
 
   @override
   State<TransactionsScreen> createState() => _TransactionsScreenState();
@@ -210,13 +210,13 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                       height: 40,
                       decoration: BoxDecoration(
                         color: isIncome
-                            ? const Color(0xFF2EE59D).withOpacity(0.06)
-                            : const Color(0xFFFF5A6A).withOpacity(0.06),
+                            ? const Color(0xFF2EE59D).withValues(alpha: 0.06)
+                            : const Color(0xFFFF5A6A).withValues(alpha: 0.06),
                         shape: BoxShape.circle,
                         border: Border.all(
                           color: isIncome
-                              ? const Color(0xFF2EE59D).withOpacity(0.15)
-                              : const Color(0xFFFF5A6A).withOpacity(0.15),
+                              ? const Color(0xFF2EE59D).withValues(alpha: 0.15)
+                              : const Color(0xFFFF5A6A).withValues(alpha: 0.15),
                         ),
                       ),
                       child: Icon(

@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 class AiAdvisorScreen extends StatefulWidget {
-  const AiAdvisorScreen({Key? key}) : super(key: key);
+  const AiAdvisorScreen({super.key});
 
   @override
   State<AiAdvisorScreen> createState() => _AiAdvisorScreenState();

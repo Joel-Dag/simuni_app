@@ -12,7 +12,7 @@ void main() {
 }
 
 class SimuniApp extends StatelessWidget {
-  const SimuniApp({Key? key}) : super(key: key);
+  const SimuniApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class SimuniApp extends StatelessWidget {
 }
 
 class MainNavigationShell extends StatefulWidget {
-  const MainNavigationShell({Key? key}) : super(key: key);
+  const MainNavigationShell({super.key});
 
   @override
   State<MainNavigationShell> createState() => _MainNavigationShellState();
@@ -45,8 +45,7 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
     _appState = AppState();
   }
 
-  // Ordered layout array map adhering strictly to your structural philosophy
-  late final List<Widget> _screens = [
+  List<Widget> get _screens => [
     HomeScreen(appState: _appState),         // 1. Home -> "How much money do I have?"
     const TransactionsScreen(), // 2. Transactions -> "What happened?"
     const AnalyticsScreen(),    // 3. Analytics -> "Why did it happen?"
@@ -82,12 +81,12 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
       decoration: BoxDecoration(
-        color: const Color(0xFF182233).withOpacity(0.94), // Blended Translucent Surface
+        color: const Color(0xFF182233).withValues(alpha: 0.94), // Blended Translucent Surface
         borderRadius: BorderRadius.circular(28),
         border: Border.all(color: const Color(0xFF222F47), width: 1.2),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.5),
+            color: Colors.black.withValues(alpha: 0.5),
             blurRadius: 25,
             offset: const Offset(0, 10),
           ),

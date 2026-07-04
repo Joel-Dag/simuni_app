@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 class BudgetScreen extends StatefulWidget {
-  const BudgetScreen({Key? key}) : super(key: key);
+  const BudgetScreen({super.key});
 
   @override
   State<BudgetScreen> createState() => _BudgetScreenState();
@@ -105,9 +105,9 @@ class _BudgetScreenState extends State<BudgetScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF2EE59D).withOpacity(0.08),
+                  color: const Color(0xFF2EE59D).withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFF2EE59D).withOpacity(0.2)),
+                  border: Border.all(color: const Color(0xFF2EE59D).withValues(alpha: 0.2)),
                 ),
                 child: const Text(
                   "SECURE",
