@@ -1,35 +1,39 @@
-name: simuni_app
-description: "A new Flutter project."
-publish_to: 'none' 
-version: 1.0.0+1
-environment:
-  sdk: ^3.12.2
+name: simuni_ledger
+description: "A premium hardware transaction ledger tracking app with local machine intelligence."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_secure_storage: ^9.0.0   # Encrypts the Gemini API Key locally
-  google_generative_ai: ^0.4.0     # Official Google Gemini SDK
-  sqflite: ^2.3.0                  # SQLite local storage engine
-  path: ^1.9.0
-  flutter_sms_inbox: ^1.0.5                     # Simplifies database routing paths
-  permission_handler: ^12.0.3
+
+  # State Management Architecture
+  provider: ^6.1.2
+
+  # Hardware Telemetry & Communication System Packages
+  permission_handler: ^11.3.1
+  flutter_sms_inbox: ^1.0.5
+
+  # Cupertino Icons for base fallback render components
   cupertino_icons: ^1.0.8
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: ^0.13.1
-  flutter_lints: ^6.0.0
+  flutter_lints: ^4.0.0
 
 flutter:
   uses-material-design: true
 
-flutter_launcher_icons:
-  android: "ic_launcher"
-  ios: true
-  image_path: "assets/logo.png"
-  remove_alpha_ios: true
-  adaptive_icon_background: "#0F0F12" 
-  adaptive_icon_foreground: "assets/logo.png"
+  # Visual Identity Typography System Matrix
+  # Make sure the font file paths match your physical directory inside your project root
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Regular.ttf
+        - asset: assets/fonts/Inter-Bold.ttf
+          weight: 700

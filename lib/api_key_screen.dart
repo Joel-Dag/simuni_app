@@ -1,7 +1,7 @@
 // lib/api_key_screen.dart
 import 'package:flutter/material.dart';
 import 'secure_storage_service.dart';
-import 'sms_sync_service.dart';
+import 'sms_history_service.dart';
 
 class ApiKeyScreen extends StatefulWidget {
   final VoidCallback onSetupComplete;
@@ -18,7 +18,7 @@ class _ApiKeyScreenState extends State<ApiKeyScreen> {
   
   bool _isAuthenticating = false;
   String? _statusMessage;
-  double _scanProgress = 0.0;
+  final double _scanProgress = 0.0;
 
   void _handleGoogleInitialization() async {
     final account = _accountController.text.trim();
@@ -40,7 +40,7 @@ class _ApiKeyScreenState extends State<ApiKeyScreen> {
       _statusMessage = "Syncing historical logs (Past 2 Months)...";
     });
 
-    final smsService = SmsSyncService();
+    final smsService = SmsHistoryService();
     await _storageService.saveApiKey("VERTEX_ROUTED_FREE_TIER");
     await _storageService.saveAccountProfile(fullAccount: account, nickname: nickname);
 
@@ -48,7 +48,6 @@ class _ApiKeyScreenState extends State<ApiKeyScreen> {
       final sixtyDaysAgo = DateTime.now().subtract(const Duration(days: 60));
       await smsService.syncSmsInbox(
         since: sixtyDaysAgo,
-        onProgress: (progress) => setState(() => _scanProgress = progress),
       );
       widget.onSetupComplete();
     } catch (e) {

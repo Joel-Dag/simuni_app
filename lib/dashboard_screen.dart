@@ -4,7 +4,7 @@ import 'secure_storage_service.dart';
 import 'analytics_engine.dart';
 import 'database_helper.dart';
 import 'transaction_model.dart';
-import 'sms_sync_service.dart';
+import 'sms_history_service.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -17,7 +17,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   final _storage = SecureStorageService();
   final _analytics = AnalyticsEngine();
   final _dbHelper = DatabaseHelper();
-  final _smsSync = SmsSyncService();
+  final _smsSync = SmsHistoryService();
 
   String _accountMask = "Loading...";
   String _accountNickname = "Account";

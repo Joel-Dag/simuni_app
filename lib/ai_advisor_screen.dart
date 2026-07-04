@@ -100,7 +100,7 @@ class _AiAdvisorScreenState extends State<AiAdvisorScreen> {
               const Icon(Icons.insights_rounded, color: Color(0xFF4DA3FF), size: 22),
               const SizedBox(width: 10),
               Text(
-                "FORECAST ANALYSIS",
+                "ADVISOR STATUS",
                 style: TextStyle(color: Colors.grey[500], fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 1.0),
               ),
             ],
