@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'app_state.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  const SettingsScreen({super.key});
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -145,7 +145,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 SwitchListTile(
                   title: const Text("Dark-First Display Slate Mode"),
                   value: appState.isDarkMode,
-                  activeColor: const Color(0xFF2EE59D),
+                  activeThumbColor: const Color(0xFF2EE59D),
                   onChanged: (val) => appState.toggleTheme(val),
                 ),
                 const Divider(color: Color(0xFF1A2336)),

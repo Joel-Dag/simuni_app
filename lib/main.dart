@@ -21,7 +21,7 @@ void main() {
 }
 
 class SimuniApp extends StatelessWidget {
-  const SimuniApp({Key? key}) : super(key: key);
+  const SimuniApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class SimuniApp extends StatelessWidget {
 
 // ─── ONBOARDING WIZARD SCREEN ───────────────────────────────────────────────
 class OnboardingWizard extends StatefulWidget {
-  const OnboardingWizard({Key? key}) : super(key: key);
+  const OnboardingWizard({super.key});
 
   @override
   State<OnboardingWizard> createState() => _OnboardingWizardState();
@@ -66,9 +66,7 @@ class _OnboardingWizardState extends State<OnboardingWizard> {
     
     if (status.isGranted) {
       final SmsQuery query = SmsQuery();
-      List<SmsMessage> messages = await query.querySms(kinds: [SmsQueryKind.inbox]);
-      final ninetyDaysAgo = DateTime.now().subtract(const Duration(days: 90));
-      
+      await query.querySms(kinds: [SmsQueryKind.inbox]);
       // Filter & process matching shortcodes (CBE, Telebirr) inside background stream here
       // state.loadParsedHistory(processedItems);
     }
@@ -142,7 +140,7 @@ class _OnboardingWizardState extends State<OnboardingWizard> {
 
 // ─── PRINCIPAL NAVIGATION SHELL INTERFACE ────────────────────────────────────
 class MainNavigationShell extends StatefulWidget {
-  const MainNavigationShell({Key? key}) : super(key: key);
+  const MainNavigationShell({super.key});
 
   @override
   State<MainNavigationShell> createState() => _MainNavigationShellState();
@@ -151,22 +149,23 @@ class MainNavigationShell extends StatefulWidget {
 class _MainNavigationShellState extends State<MainNavigationShell> {
   int _currentIndex = 0;
 
-  final List<Widget> _screens = [
-    const HomeScreen(),
-    const TransactionsScreen(),
-    const AnalyticsScreen(),
-    const BudgetScreen(),
-    const AiAdvisorScreen(),
-    const SettingsScreen(), // Added structural 6th viewport matrix
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<AppState>(context);
+    
+    final List<Widget> screens = [
+      HomeScreen(appState: appState),
+      const TransactionsScreen(),
+      const AnalyticsScreen(),
+      const BudgetScreen(),
+      const AiAdvisorScreen(),
+      const SettingsScreen(),
+    ];
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Stack(
         children: [
-          IndexedStack(index: _currentIndex, children: _screens),
+          IndexedStack(index: _currentIndex, children: screens),
           Positioned(left: 14, right: 14, bottom: 20, child: _buildPremiumGlassNavBar()),
         ],
       ),
@@ -177,7 +176,7 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
       decoration: BoxDecoration(
-        color: const Color(0xFF182233).withOpacity(0.94),
+        color: const Color(0xFF182233).withValues(alpha: 0.94),
         borderRadius: BorderRadius.circular(28),
         border: Border.all(color: const Color(0xFF222F47), width: 1.2),
       ),
@@ -198,7 +197,7 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
   Widget _navItem(int index, IconData icon, String label) {
     final isSelected = _currentIndex == index;
     Color activeColor = index == 4 ? const Color(0xFFF7C948) : const Color(0xFF4DA3FF);
-    if (index == 5) activeColor = Colors.white75;
+    if (index == 5) activeColor = Colors.white.withValues(alpha: 0.75);
 
     return GestureDetector(
       onTap: () => setState(() => _currentIndex = index),
@@ -208,7 +207,7 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
         children: [
           Icon(icon, color: isSelected ? activeColor : Colors.grey[500], size: isSelected ? 22 : 20),
           const SizedBox(height: 2),
-          Text(label, style: TextStyle(color: isSelected ? Colors.white : Colors.grey[600], fontSize: 9)),
+          Text(label, style: TextStyle(color: isSelected ? Colors.white : (Colors.grey[600] ?? Colors.grey).withValues(alpha: 0.75), fontSize: 9)),
         ],
       ),
     );

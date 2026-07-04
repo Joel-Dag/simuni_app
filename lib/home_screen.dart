@@ -114,8 +114,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         const SizedBox(height: 6),
-        Row(
-          children: const [
+        const Row(
+          children: [
             Icon(Icons.trending_up_rounded, color: Color(0xFF2EE59D), size: 16),
             SizedBox(width: 4),
             Text(
