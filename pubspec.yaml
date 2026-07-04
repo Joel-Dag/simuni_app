@@ -29,11 +29,3 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-  # Visual Identity Typography System Matrix
-  # Make sure the font file paths match your physical directory inside your project root
-  fonts:
-    - family: Inter
-      fonts:
-        - asset: assets/fonts/Inter-Regular.ttf
-        - asset: assets/fonts/Inter-Bold.ttf
-          weight: 700
